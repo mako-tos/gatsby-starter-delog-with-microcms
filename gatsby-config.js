@@ -4,17 +4,24 @@
  * See: https://www.gatsbyjs.org/docs/gatsby-config/
  */
 
+require('dotenv').config()
+const proxy = require("http-proxy-middleware")
+const siteMetadata = require("./site-meta-data.json")
 module.exports = {
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      })
+    )
+  },
   /* Your site config here */
-  siteMetadata: require("./site-meta-data.json"),
+  siteMetadata: siteMetadata,
   plugins: [
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `markdown-pages`,
-        path: `${__dirname}/_data`,
-      },
-    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
@@ -37,7 +44,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         // The property ID; the tracking code won't be generated without it. replace with yours
-        trackingId: "UA-164743872-1",
+        trackingId: process.env.GOOGLE_ANALYTICS,
         head: true,
       }
     },
@@ -55,10 +62,32 @@ module.exports = {
     },
     `gatsby-plugin-sass`, 
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-netlify-cms`,
     'gatsby-plugin-dark-mode',
     // siteURL is a must for sitemap generation
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-offline`,
+    {
+      resolve: 'gatsby-source-microcms',
+      options: {
+        apiKey: process.env.MICRO_CMS_API_KEY,
+        serviceId: process.env.MICRO_CMS_SERVICE_ID,
+        endpoint: process.env.MICRO_CMS_ENDPOINT,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-netlify-identity`,
+      options: {
+        url: siteMetadata.siteUrl // required!
+      }
+    },
+    {
+      resolve: "gatsby-plugin-webpack-bundle-analyser-v2",
+      options: {
+        devMode: false,
+        analyzerMode: 'static',
+        openAnalyzer: false,
+        reportFilename: 'report.html'
+      },
+    },
   ],
 }

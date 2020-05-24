@@ -6,21 +6,17 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const blogPostTemplate = path.resolve(`src/templates/blogTemplate.js`)
 
   const result = await graphql(`
-    {
-      allMarkdownRemark(
-        sort: { order: DESC, fields: [frontmatter___date] }
-        limit: 1000
-      ) {
-        edges {
-          node {
-            id
-            frontmatter {
-              path
-            }
-          }
+  query {
+    allMicrocmsBlog(sort: { fields: createdAt, order: DESC }) {
+      edges {
+        node {
+          blogId
+          createdAt(formatString: "YYYY-MM-DD")
+          path
         }
       }
     }
+  }
   `)
 
   // Handle errors
@@ -29,11 +25,13 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     return
   }
 
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  result.data.allMicrocmsBlog.edges.forEach(({ node }) => {
     createPage({
-      path: node.frontmatter.path,
+      path: `${node.createdAt}-${node.path}`,
       component: blogPostTemplate,
-      context: {}, // additional data can be passed via context
+      context: {
+        blogId: node.blogId
+      }, // additional data can be passed via context
     })
   })
 }

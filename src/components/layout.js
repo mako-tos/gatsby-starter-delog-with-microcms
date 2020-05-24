@@ -25,7 +25,7 @@ export default ({ children }) => {
       </header>
       {children}
       <footer className="site-footer">
-        <p>&copy; {new Date().getFullYear()} Delog &bull; Crafted with <span role="img" aria-label="love">❤️</span> by <a href="https://w3layouts.com">W3Layouts</a></p>
+        <p>&copy; {new Date().getFullYear()} Delog with microCMS &bull; Updated with by <a href="https://myblog-by-mako-tos.netlify.app/">mako-tos</a></p>
       </footer>
     </div>
   )

@@ -1,37 +1,64 @@
-import React from "react"
-import Helmet from 'react-helmet';
-import { graphql } from 'gatsby'
-import Layout from "../components/layout"
-import PostLink from "../components/post-link"
-import HeroHeader from "../components/heroHeader"
+import React from "react";
+import { graphql } from "gatsby";
+import Layout from "../components/layout";
+import PostLink from "../components/post-link";
+import HeroHeader from "../components/heroHeader";
+import PropTypes from "prop-types";
+import SEO from "../components/SEO";
 
 const IndexPage = ({
   data: {
     site,
-    allMarkdownRemark: { edges },
+    allMicrocmsBlog: { edges },
   },
+  location,
 }) => {
-
   const Posts = edges
-    .filter(edge => !!edge.node.frontmatter.date) // You can filter your posts based on some criteria
-    .map(edge => <PostLink key={edge.node.id} post={edge.node} />)
+    .map((edge) => <PostLink key={edge.node.blogId} post={edge.node} />);
 
   return (
     <Layout>
-      <Helmet>
-        <title>{site.siteMetadata.title}</title>
-        <meta name="description" content={site.siteMetadata.description} />
-      </Helmet>
-      <HeroHeader/>
-      <h2>Blog Posts &darr;</h2>
-      <div className="grids">
-        {Posts}
-      </div>
+      <SEO
+        title={site.siteMetadata.title}
+        description={site.siteMetadata.description}
+        pathname={location.pathname}
+      />
+      <HeroHeader />
+      <h2>Blog 一覧 &darr;</h2>
+      <div className="grids">{Posts}</div>
     </Layout>
-  )
-}
+  );
+};
 
-export default IndexPage
+export default IndexPage;
+
+IndexPage.propTypes = {
+  data: PropTypes.shape({
+    site: PropTypes.shape({
+      siteMetadata: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
+      })
+    }),
+    allMicrocmsBlog: PropTypes.shape({
+      edges: PropTypes.arrayOf(
+        PropTypes.shape({
+          node: PropTypes.shape({
+            blogId: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            createdAt: PropTypes.string.isRequired,
+            updatedAt: PropTypes.string.isRequired,
+            path: PropTypes.string.isRequired,
+            thumbnail: PropTypes.shape({
+              url: PropTypes.string,
+            }),
+          }),
+        }).isRequired
+      ),
+    }),
+  }),
+};
+
 export const pageQuery = graphql`
   query indexPageQuery {
     site {
@@ -40,19 +67,19 @@ export const pageQuery = graphql`
         description
       }
     }
-    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
+    allMicrocmsBlog(sort: { fields: createdAt, order: DESC }) {
       edges {
         node {
-          id
-          excerpt(pruneLength: 250)
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            path
-            title
-            thumbnail
+          blogId
+          title
+          createdAt(formatString: "YYYY-MM-DD")
+          updatedAt(formatString: "YYYY-MM-DD")
+          path
+          thumbnail {
+            url
           }
         }
       }
     }
   }
-`
+`;
