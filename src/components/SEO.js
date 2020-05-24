@@ -39,7 +39,7 @@ const SEO = ({ title, metaDescription, image, pathname, article }) => {
       <meta name="twitter:image" content={seo.image} />
 
       {pathname === '/' &&
-        <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+        <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
       }
     </Helmet>
   )
