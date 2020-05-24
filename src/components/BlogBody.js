@@ -7,7 +7,7 @@ const BlogBody = ({location, data}) => (
     <SEO
       pathname={location.pathname}
       title={data.title}
-      image={data.thumbnail.url}
+      image={data.thumbnail && data.thumbnail.url}
       description={data.html}
       article
     />
