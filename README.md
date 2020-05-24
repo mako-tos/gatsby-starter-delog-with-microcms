@@ -19,7 +19,10 @@ gatsby new delog https://github.com/mako-tos/gatsby-starter-delog-with-microcms
 ---
 
 ## Documentation
-[microCMSのはじめ方](https://microcms.io/blog/getting-started/)を読んでmicroCMSのアカウントを作成してください
+[microCMSのはじめ方](https://microcms.io/blog/getting-started/)を読んでmicroCMSのアカウントを作成してください  
+またAPIスキーマ（インターフェース）を  
+/microcms/api-blog.json  
+としてエクスポートしておきましたのでAPIスキーマ定義でご活用ください。  
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/mako-tos/gatsby-starter-delog-with-microcms)を押して作成されたサイトに環境変数を入力します
 
@@ -37,7 +40,7 @@ microCMSの画面プレビューを利用するは
 https://your-site-name.netlify.app/draft?contentId={CONTENT_ID}&draftKey={DRAFT_KEY}  
 のように登録してください  
 
-またdraft画面はnetlify identityでパスワード認証を設定していますのでhttps://app.netlify.com/sites/your-site-name/identityにアクセスして認証とアクティベーションをしてください
+またdraft画面はnetlify identityでパスワード認証を設定していますので https://app.netlify.com/sites/your-site-name/identity にアクセスして認証とアクティベーションをしてください
 
 ## Credits
 - Awesome image used in demo is from [Unsplash](https://unsplash.com)

@@ -1,0 +1,1 @@
+[{"fieldId":"title","name":"タイトル","kind":"text","required":true},{"fieldId":"path","name":"パス","kind":"text","required":true},{"fieldId":"html","name":"本文","kind":"richEditor","required":true},{"fieldId":"thumbnail","name":"サムネイル画像","kind":"media"}]
