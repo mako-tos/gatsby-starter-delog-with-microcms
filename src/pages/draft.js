@@ -13,7 +13,8 @@ class DraftImpl extends Component {
   constructor(props){
     super(props);
     this.state = {
-      data: null
+      data: null,
+      message: 'waiting data loaded'
     };
   }
   
@@ -28,6 +29,10 @@ class DraftImpl extends Component {
     const draftKey = url.searchParams.get('draftKey')
     const contentId = url.searchParams.get('contentId')
     if (!contentId) {
+      this.setState({
+        data : null,
+        message: 'failed to load data: contentId is undefined'
+      });
       return
     }
     fetch(`/.netlify/functions/draft?draftKey=${draftKey}&contentId=${contentId}`)
@@ -36,14 +41,15 @@ class DraftImpl extends Component {
       res.createdAt = dayjs(res.createdAt).format('YYYY-MM-DD')
       res.updatedAt = dayjs(res.updatedAt).format('YYYY-MM-DD')
       this.setState({
-        data : res
+        data : res,
+        message: ''
       });
     })
   }
   
   render() {
     if (!this.state.data) {
-      return (<p>waiting data loaded</p>)
+      return (<p>{this.state.message}</p>)
     }
     return (
       <BlogBody data={this.state.data} location={this.props.location} />
@@ -60,8 +66,7 @@ const Draft = ({location}) => {
   return (
     <>
       <nav style={{ background: "green" }}>
-        {" "}
-        Login Status:
+        Please
         <button className="btn" onClick={() => setDialog(true)}>
           LOG IN
         </button>

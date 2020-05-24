@@ -8,7 +8,7 @@ const BlogBody = ({location, data}) => (
       pathname={location.pathname}
       title={data.title}
       image={data.thumbnail && data.thumbnail.url}
-      description={data.html}
+      html={data.html}
       article
     />
     <div className="blog-post-container">

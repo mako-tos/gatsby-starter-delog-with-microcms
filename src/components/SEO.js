@@ -2,13 +2,14 @@ import React from "react"
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { useStaticQuery, graphql } from "gatsby"
+import { html2description } from '../utils'
 
-const SEO = ({ title, metaDescription, image, pathname, article }) => {
+const SEO = ({ title, html, image, pathname, article }) => {
   const data = useStaticQuery(pageQuery)
   const siteData = data.site.siteMetadata
   const realTitle = title === siteData.title ? title : `${title} | ${siteData.title}`
   const seo = {
-    description: metaDescription || siteData.description,
+    description: html2description(html) || siteData.description,
     path: `${siteData.siteUrl}${pathname}`,
     title: realTitle,
     image: image,
@@ -49,7 +50,7 @@ export default SEO
 
 SEO.propTypes = {
   title: PropTypes.string,
-  metaDescription: PropTypes.string,
+  html: PropTypes.string,
   image: PropTypes.string,
   pathname: PropTypes.string,
   article: PropTypes.bool,
@@ -57,7 +58,7 @@ SEO.propTypes = {
 
 SEO.defaultProps = {
   title: null,
-  metaDescription: null,
+  html: null,
   image: null,
   pathname: null,
   article: false,

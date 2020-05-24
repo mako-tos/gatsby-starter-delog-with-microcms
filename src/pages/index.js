@@ -20,7 +20,7 @@ const IndexPage = ({
     <Layout>
       <SEO
         title={site.siteMetadata.title}
-        description={site.siteMetadata.description}
+        html={site.siteMetadata.description}
         pathname={location.pathname}
       />
       <HeroHeader />
