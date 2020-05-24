@@ -34,7 +34,7 @@ NetlifyとmicroCMSのWebhookを設定すると快適になると思います
 
 
 microCMSの画面プレビューを利用するは  
-https://your-site-name.netlify.app/draft?contactId={CONTENT_ID}&draftKey={DRAFT_KEY}  
+https://your-site-name.netlify.app/draft?contentId={CONTENT_ID}&draftKey={DRAFT_KEY}  
 のように登録してください  
 
 またdraft画面はnetlify identityでパスワード認証を設定していますのでhttps://app.netlify.com/sites/your-site-name/identityにアクセスして認証とアクティベーションをしてください
