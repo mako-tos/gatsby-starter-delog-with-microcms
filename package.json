@@ -1,11 +1,11 @@
 {
-  "name": "gatsby-starter-delog",
+  "name": "gatsby-starter-delog-with-microcms",
   "description": "A simplified blog for developers and designer. This starter built with Gatsby and Netlify CMS",
-  "author": "W3Layouts Team <info@w3layouts.com>",
-  "version": "1.6.0",
+  "author": "mako-tos",
+  "version": "1.0.0",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/W3Layouts/gatsby-starter-delog/issues"
+    "url": "https://github.com/mako-tos/gatsby-starter-delog-with-microcms/issues"
   },
   "dependencies": {
     "@reach/dialog": "^0.10.3",
@@ -42,14 +42,14 @@
   "devDependencies": {
     "prettier": "^1.19.1"
   },
-  "homepage": "https://github.com/W3Layouts/gatsby-starter-delog#readme",
+  "homepage": "https://github.com/mako-tos/gatsby-starter-delog-with-microcms#readme",
   "keywords": [
     "gatsby",
     "netlify cms"
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/W3Layouts/gatsby-starter-delog.git"
+    "url": "git+https://github.com/mako-tos/gatsby-starter-delog-with-microcms.git"
   },
   "scripts": {
     "build": "GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --log-pages",
